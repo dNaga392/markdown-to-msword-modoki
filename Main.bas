@@ -1,15 +1,15 @@
 ''''
-'''' Markdown to Wordã‚³ãƒ³ãƒãƒ¼ã‚¿ãƒ¼ è©¦é£Ÿå“
-'''' ã‚¹ã‚¿ã‚¤ãƒ«ã¯äºˆã‚æ–‡æ›¸ã«çµ„ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹ã¤ã‚‚ã‚Šã¨ã™ã‚‹ã€‚
+'''' Markdown to WordƒRƒ“ƒo[ƒ^[ H•i
+'''' ƒXƒ^ƒCƒ‹‚Í—\‚ß•¶‘‚É‘g‚İ‚Ü‚ê‚Ä‚¢‚é‚Â‚à‚è‚Æ‚·‚éB
 '''' Author kiyo-hiko
 '''' Since 2015. 2.17
 ''''
-''' Markdownã¦ããªãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚“ã§æ›¸å¼ä»˜ãWordæ–‡æ›¸ã«å¤‰æ›ã€‚
+''' Markdown‚Ä‚«‚ÈƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğ“Ç‚ñ‚Å‘®•t‚«Word•¶‘‚É•ÏŠ·B
 Sub ReadMDLikeText()
     Dim dlg: Set dlg = Application.FileDialog(msoFileDialogOpen)
     With dlg.Filters
         .Clear
-        .Add "ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«", "*.txt", 1
+        .Add "ƒeƒLƒXƒgƒtƒ@ƒCƒ‹", "*.txt", 1
     End With
     If dlg.Show = -1 Then
         Dim f: For Each f In dlg.SelectedItems
@@ -24,27 +24,27 @@ Sub ReadMDLikeText()
     End If
 End Sub
 
-''' è¡Œå˜ä½ã®æ›¸å¼è¨­å®šã¯ã“ã‚Œã§ã‚„ã‚‹ã€‚å¤‰æ›ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è‚¥å¤§åŒ–ã•ã›ãŸããªã„ã—ã€‚
+''' s’PˆÊ‚Ì‘®İ’è‚Í‚±‚ê‚Å‚â‚éB•ÏŠ·ƒƒ\ƒbƒh‚ğ”ì‘å‰»‚³‚¹‚½‚­‚È‚¢‚µB
 Function ApplyFormat(l)
     With Selection
         If False Then
             MsgBox 1
         ElseIf Left(l, 4) = "### " Then
-            .Paragraphs.Style = ActiveDocument.Styles("è¦‹å‡ºã—3")
+            .Paragraphs.Style = ActiveDocument.Styles("Œ©o‚µ3")
             ApplyFormat = Mid(l, 5)
         ElseIf Left(l, 3) = "## " Then
-            .Paragraphs.Style = ActiveDocument.Styles("è¦‹å‡ºã—2")
+            .Paragraphs.Style = ActiveDocument.Styles("Œ©o‚µ2")
             ApplyFormat = Mid(l, 4)
         ElseIf Left(l, 2) = "# " Then
-            .Paragraphs.Style = ActiveDocument.Styles("è¦‹å‡ºã—1")
+            .Paragraphs.Style = ActiveDocument.Styles("Œ©o‚µ1")
             ApplyFormat = Mid(l, 3)
         ElseIf Left(l, 1) = ">" Then
-            .Paragraphs.Style = ActiveDocument.Styles("å¼•ç”¨")
+            .Paragraphs.Style = ActiveDocument.Styles("ˆø—p")
             ApplyFormat = Mid(l, 2)
-        ElseIf Left(l, 3) = "** " Then ' ç•ªå·ãªã—ãƒªã‚¹ãƒˆï¼šãƒ¬ãƒ™ãƒ«2
+        ElseIf Left(l, 3) = "** " Then ' ”Ô†‚È‚µƒŠƒXƒgFƒŒƒxƒ‹2
             .Range.SetListLevel Level:=2
             ApplyFormat = Mid(l, 3)
-        ElseIf Left(l, 2) = "* " Then ' ç•ªå·ãªã—ãƒªã‚¹ãƒˆï¼šãƒ¬ãƒ™ãƒ«1
+        ElseIf Left(l, 2) = "* " Then ' ”Ô†‚È‚µƒŠƒXƒgFƒŒƒxƒ‹1
             .Range.SetListLevel Level:=1
             .Range.ListFormat.ApplyListTemplateWithLevel _
                 ListTemplate:=ListGalleries(wdBulletGallery).ListTemplates(1), _
@@ -52,21 +52,21 @@ Function ApplyFormat(l)
                 ApplyTo:=wdListApplyToWholeList, _
                 DefaultListBehavior:=wdWord10ListBehavior
             ApplyFormat = Mid(l, 3)
-        ElseIf Left(l, 3) = "1. " Then ' ç•ªå·ä»˜ããƒªã‚¹ãƒˆï¼šä»Šã®ã¨ã“ã‚é€£ç•ªã«ã§ããªã„
+        ElseIf Left(l, 3) = "1. " Then ' ”Ô†•t‚«ƒŠƒXƒgF¡‚Ì‚Æ‚±‚ë˜A”Ô‚É‚Å‚«‚È‚¢
             .Range.ListFormat.ApplyListTemplateWithLevel _
                 ListTemplate:=ListGalleries(wdNumberGallery).ListTemplates(7), _
                 ContinuePreviousList:=False, _
                 ApplyTo:=wdListApplyToWholeList, _
                 DefaultListBehavior:=wdWord10ListBehavior
             ApplyFormat = Mid(l, 4)
-        ElseIf l = "***" Then ' æ°´å¹³ç·šï¼šãªã‚“ã‹ã‚¨ãƒ©ãƒ¼å‡ºã‚‹ã®ã§å®Ÿè£…ã§ãã¦ãªã„
+        ElseIf l = "***" Then ' …•½üF‚È‚ñ‚©ƒGƒ‰[o‚é‚Ì‚ÅÀ‘•‚Å‚«‚Ä‚È‚¢
             ' With .Paragraphs.Borders(wdBorderBottom)
             '     .LineStyle = wdLineStyleSingle
             '     .Color = Options.DefaultBorderColor
             ' End With
             ApplyFormat = ""
         Else
-            .Paragraphs.Style = ActiveDocument.Styles("æ¨™æº–")
+            .Paragraphs.Style = ActiveDocument.Styles("•W€")
             ApplyFormat = l
         End If
     End With
